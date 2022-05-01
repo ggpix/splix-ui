@@ -20,6 +20,22 @@ local loaders = {}
 local utility = {}
 --
 local check_exploit = (syn and "Synapse") or (KRNL_LOADED and "Krnl") or (isourclosure and "ScriptWare") or nil
+
+local function SendNotification(Title, Description, Amount)
+    game.StarterGui:SetCore("SendNotification", {
+        Title = Title or "Aisar UI";
+        Text = Description or "";
+        Duration = Amount;
+        Button1 = "Ignore";
+    })
+end
+
+if check_exploit == "Krnl" or "ScriptWare" then
+    SendNotification("Aisar UI", check_exploit.." is not supported. Only Synapse X.")
+else
+    SendNotification("Aisar UI", "Aisar UI stays unpatchable..", 3)
+end
+
 local plrs = game:GetService("Players")
 local cre = game:GetService("CoreGui")
 local rs = game:GetService("RunService")
@@ -4598,4 +4614,5 @@ function sections:configloader(props)
 	setmetatable(configloader, configloaders)
 	return configloader 
 end
+
 return library
