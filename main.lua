@@ -19,7 +19,7 @@ local loaders = {}
 --
 local utility = {}
 --
-local check_exploit = (syn and "Synapse") or (KRNL_LOADED and "Krnl") or (isourclosure and "ScriptWare") or nil
+local check_exploit = (identifyexecutor and identifyexecutor()) or (syn and "Synapse")
 
 local function SendNotification(Title, Description, Amount)
     game.StarterGui:SetCore("SendNotification", {
@@ -30,14 +30,14 @@ local function SendNotification(Title, Description, Amount)
     })
 end
 
-if check_exploit == "Krnl" or "ScriptWare" then
-    SendNotification("Aisar UI", check_exploit.." is not supported. Only Synapse X.")
-else
+if check_exploit then
     SendNotification("Aisar UI", "Aisar UI stays unpatchable..", 3)
+else
+	SendNotification('Aisar UI','Aisar UI may not support your executor.',3)
 end
 
 local plrs = game:GetService("Players")
-local cre = game:GetService("CoreGui")
+local cre = gethui and gethui() or game:GetService("CoreGui")
 local rs = game:GetService("RunService")
 local ts = game:GetService("TweenService") 
 local uis = game:GetService("UserInputService") 
