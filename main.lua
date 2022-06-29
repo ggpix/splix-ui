@@ -32,6 +32,8 @@ end
 
 if check_exploit then
     SendNotification("Aisar UI", "Aisar UI stays unpatchable..", 3)
+else
+	SendNotification('Aisar UI','Aisar UI may not support your executor.',3)
 end
 
 local plrs = game:GetService("Players")
